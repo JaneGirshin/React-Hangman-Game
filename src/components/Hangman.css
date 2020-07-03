@@ -33,6 +33,10 @@ p {
 .guess-text {
     font-size: 18px;
 }
+/* 
+.letters {
+	width: 50%;
+} */
 
 button {
 	box-shadow: inset 0px 1px 0px 0px #ffffff;

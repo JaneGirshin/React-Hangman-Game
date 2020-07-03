@@ -29,18 +29,18 @@ class Hangman extends Component {
         let letter = e.target.value;
         this.setState(st => ({
             guessed: st.guessed.add(letter),
-            mistake: st.mistake + (st.answer.includes(letter) ? 0 : 1)
+            mistake: st.mistake + (st.answer[0].includes(letter) ? 0 : 1)
         }));
     }
 
     guessedWord() {
-        return this.state.answer.split("").map(letter => (this.state.guessed.has(letter) ? letter : " _ "));
+        return this.state.answer[0].split("").map(letter => (this.state.guessed.has(letter) ? letter : "_"));
     }
 
     generateButtons() {
         return "abcdefghijklmnopqrstuvwxyz".split("").map(letter => (
             <button
-                class='btn btn-lg btn-primary m-2'
+                className='btn btn-lg btn-primary m-2'
                 key={letter}
                 value={letter}
                 onClick={this.handleGuess}
@@ -61,15 +61,15 @@ class Hangman extends Component {
 
     render() {
         const gameOver = this.state.mistake >= this.props.maxWrong;
-        const isWinner = this.guessedWord().join("") === this.state.answer;
-        let gameStat = this.generateButtons();
+        const isWinner = this.guessedWord().join("") === this.state.answer[0];
+        let gameState = this.generateButtons();
 
         if (isWinner) {
-            gameStat = "You Won!"
+            gameState = "You Won!"
         }
 
         if (gameOver) {
-            gameStat = "You Lost..."
+            gameState = "You Lost..."
         }
 
         return (
@@ -82,9 +82,11 @@ class Hangman extends Component {
                         <img src={this.props.images[this.state.mistake]} alt=""/>
                     </div>
                     <div>
-                        <p className="guess-text">Guess the Animal:</p>
-                        <p>{!gameOver ? this.guessedWord() : this.state.answer}</p>
-                        <p>{gameStat}</p>
+                        <p className="guess-text">Guess the {this.state.answer[1]}:</p>
+                        <p>{!gameOver ? this.guessedWord() : this.state.answer[0]}</p>
+                    </div>
+                    <div className="letters">
+                        <p>{gameState}</p>
                     </div>
                 </div>
             </>
