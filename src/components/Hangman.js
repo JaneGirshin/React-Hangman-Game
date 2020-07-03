@@ -40,7 +40,7 @@ class Hangman extends Component {
     generateButtons() {
         return "abcdefghijklmnopqrstuvwxyz".split("").map(letter => (
             <button
-                className='btn btn-lg btn-primary m-2'
+                className='letter-btn'
                 key={letter}
                 value={letter}
                 onClick={this.handleGuess}
@@ -74,19 +74,27 @@ class Hangman extends Component {
 
         return (
             <>
-                <div className="wrong-geusses">Wrong Guesses: {this.state.mistake} of {this.props.maxWrong}</div>
-                <button className='reset-btn' onClick={this.resetButton}>Reset</button>
-                <div className="hangman">
+                <header>
                     <h1>Hangman</h1>
-                    <div>
+                </header>
+                <div className="game">
+                    <button className='reset-btn' onClick={this.resetButton}>Reset Game</button>
+                    <div className="wrong-geusses">
+                        Wrong Guesses: {this.state.mistake} of {this.props.maxWrong}
+                    </div>
+                    <div className="hangman-img">
                         <img src={this.props.images[this.state.mistake]} alt=""/>
                     </div>
-                    <div>
-                        <p className="guess-text">Guess the {this.state.answer[1]}:</p>
-                        <p>{!gameOver ? this.guessedWord() : this.state.answer[0]}</p>
+                    <div className="guess-text">
+                        <div className="guess-catrgory">
+                            <p>Guess the {this.state.answer[1]}:</p>
+                        </div>
+                        <div className="guess-word">
+                            {!gameOver ? this.guessedWord() : this.state.answer[0]}
+                        </div>
                     </div>
                     <div className="letters">
-                        <p>{gameState}</p>
+                        {gameState}
                     </div>
                 </div>
             </>
