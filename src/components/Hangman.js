@@ -87,7 +87,7 @@ class Hangman extends Component {
                     </div>
                     <div className="guess-text">
                         <div className="guess-catrgory">
-                            <p>Guess the {this.state.answer[1]}:</p>
+                            <p>Guess the <span id="catrgory-word">{this.state.answer[1]}</span>:</p>
                         </div>
                         <div className="guess-word">
                             {!gameOver ? this.guessedWord() : this.state.answer[0]}
